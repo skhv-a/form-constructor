@@ -1,0 +1,26 @@
+.alert {
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  padding: 14px 7px 13px;
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+}
+
+.alert_success {
+  color: var(--green);
+}
+
+.alert_error {
+  color: var(--red);
+}
+
+.alert__icon {
+  width: 24px;
+  height: 24px;
+}
+
+.alert__content {
+  font-size: 16px;
+  line-height: 150%;
+}
