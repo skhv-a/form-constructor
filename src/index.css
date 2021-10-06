@@ -1,3 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+:root {
+  --dark: #272727;
+  --dark-rgb: 39, 39, 39;
+  --siberian-blue: #1390e5;
+  --gray: #1717194d;
+  --red: #eb5757;
+  --green: #00a241;
+}
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -8,4 +19,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.schema-accordion-item__extra {
+  position: absolute;
 }
