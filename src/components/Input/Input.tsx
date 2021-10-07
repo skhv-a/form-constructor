@@ -2,11 +2,15 @@ import { FC, HTMLProps } from "react";
 import { joinClassNames } from "utils/utils";
 import "./styles.css";
 
-type Props = HTMLProps<HTMLInputElement> & {
+export type InputProps = HTMLProps<HTMLInputElement> & {
   isInvalid?: boolean;
 };
 
-const Input: FC<Props> = ({ className, isInvalid, ...props }: Props) => {
+const Input: FC<InputProps> = ({
+  className,
+  isInvalid,
+  ...props
+}: InputProps) => {
   return (
     <input
       {...props}
