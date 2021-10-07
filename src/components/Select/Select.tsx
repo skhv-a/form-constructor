@@ -11,16 +11,18 @@ export type Option = {
 };
 
 type Props = {
-  selected: Option | null;
+  selected?: string;
   options: Option[];
   placeholder: string;
-  onSelect: (option: Option | null) => void;
+  isInvalid?: boolean;
+  onSelect?: (option: string) => void;
 };
 
 const Select: FC<Props> = ({
   options,
-  selected,
+  selected: selectedKey,
   placeholder,
+  isInvalid,
   onSelect,
 }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -28,11 +30,14 @@ const Select: FC<Props> = ({
 
   useOnOutsideClick(ref, setOpened.off);
 
+  const selected = options.find((o) => o.key === selectedKey);
+
   return (
     <div ref={ref} className="select">
       <div
         className={joinClassNames(
           "select__header",
+          isInvalid && "select__header_error",
           isOpened && "select__header_opened"
         )}
         onClick={setOpened.toggle}
@@ -40,16 +45,28 @@ const Select: FC<Props> = ({
         {selected ? (
           <div className="select__value">{selected.value}</div>
         ) : (
-          <div className="select__placeholder">{placeholder}</div>
+          <div
+            className={joinClassNames(
+              "select__placeholder",
+              isInvalid && "select__placeholder_error"
+            )}
+          >
+            {placeholder}
+          </div>
         )}
         <img src={arrow} alt="arrow" />
       </div>
       {isOpened && (
-        <div className="select__body">
+        <div
+          className={joinClassNames(
+            "select__body",
+            isInvalid && "select__body_error"
+          )}
+        >
           {options.map((option) => {
-            const isSelected = option.key === selected?.key;
+            const isSelected = option.key === selectedKey;
             const clickHandler = () => {
-              onSelect(isSelected ? null : option); // null to reset selected value
+              onSelect?.(isSelected ? "" : option.key); // '' to reset selected value
               setOpened.off();
             };
 
