@@ -4,17 +4,18 @@ import InlineLabel from "components/InlineLabel/InlineLabel";
 
 type Props = {
   label: string;
-  checked: boolean;
+  checked?: boolean;
   disabled?: boolean;
-  onCheck: (isChecked: boolean) => void;
+  onCheck?: (isChecked: boolean) => void;
 };
 
 const Switch = ({ label, checked, disabled, onCheck }: Props) => {
   return (
     <div className="switch-container">
       <button
+        type="button"
         disabled={disabled}
-        onClick={() => onCheck(!checked)}
+        onClick={() => onCheck?.(!checked)}
         className={joinClassNames(
           "switch",
           checked && "switch_checked",
