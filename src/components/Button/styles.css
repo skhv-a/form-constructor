@@ -1,0 +1,27 @@
+.button {
+  font-size: 20px;
+  line-height: 120%;
+  width: fit-content;
+  padding: 14px 20px;
+  border-radius: 5px;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.button_primary {
+  background-color: var(--siberian-blue);
+  color: white;
+}
+
+.button_secondary {
+  padding: 13px 19px;
+  background-color: white;
+  color: var(--siberian-blue);
+  border: 1px solid currentColor;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
