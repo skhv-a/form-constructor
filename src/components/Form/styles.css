@@ -1,0 +1,26 @@
+.form-item {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.form-item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.form-item__label {
+  color: var(--dark);
+}
+
+.form-item__label_required::before {
+  content: "* ";
+  color: var(--red);
+}
+
+.form-item__label_error {
+  color: var(--red);
+}
+
+.form-item__error {
+  color: var(--red);
+  margin-top: 5px;
+}
