@@ -8,6 +8,7 @@
 }
 
 .form-item__label {
+  display: block;
   color: var(--dark);
 }
 
