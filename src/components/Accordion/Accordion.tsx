@@ -4,6 +4,7 @@ import { joinClassNames } from "utils/utils";
 import "./styles.css";
 
 type Props = {
+  className?: string;
   defaultOpened?: string[];
   children: ReactElement<ItemProps>[];
 };
@@ -12,7 +13,11 @@ type IAccordion = FC<Props> & {
   Item: FC<ItemProps>;
 };
 
-const Accordion: IAccordion = ({ defaultOpened = [], children }: Props) => {
+const Accordion: IAccordion = ({
+  className,
+  defaultOpened = [],
+  children,
+}: Props) => {
   const [openedItems, setOpenedItems] = useState<string[]>(defaultOpened);
 
   const openItem = (id: string) => setOpenedItems((prev) => [...prev, id]);
@@ -20,16 +25,20 @@ const Accordion: IAccordion = ({ defaultOpened = [], children }: Props) => {
     setOpenedItems((prev) => prev.filter((i) => i !== id));
 
   return (
-    <div className="accordion">
+    <div className={joinClassNames("accordion", className)}>
       {children.map((item) => {
         const { id } = item.props;
 
         const isOpened = openedItems.includes(id);
-        const clickHandler = () => (isOpened ? closeItem(id) : openItem(id));
+        const onClick = () => (isOpened ? closeItem(id) : openItem(id));
 
         return (
-          <div key={id} onClick={clickHandler}>
-            {React.cloneElement(item, { ...item.props, isOpened })}
+          <div key={id}>
+            {React.cloneElement(item, {
+              ...item.props,
+              isOpened,
+              onClick,
+            })}
           </div>
         );
       })}
@@ -44,23 +53,28 @@ type ItemProps = {
   isOpened?: boolean;
   title: Title;
   extra?: React.ReactNode;
+  className?: string;
   children: React.ReactNode;
+  onClick?: () => void;
 };
 
 const AccordionItem: FC<ItemProps> = ({
   isOpened,
   title,
   extra,
+  className,
   children,
+  onClick,
 }: ItemProps) => {
   return (
     <div
       className={joinClassNames(
         "accordion-item",
+        className,
         isOpened && "accordion-item_opened"
       )}
     >
-      <div className="accordion-item__header">
+      <div className="accordion-item__header" onClick={onClick}>
         <div className="accordion-item-title">
           <img
             src={arrow}
@@ -74,7 +88,14 @@ const AccordionItem: FC<ItemProps> = ({
         </div>
         <div className="accordion-item__extra">{extra}</div>
       </div>
-      {isOpened && <div className="accordion-item__body">{children}</div>}
+      <div
+        className={joinClassNames(
+          "accordion-item__body",
+          isOpened && "accordion-item__body_opened"
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 };
