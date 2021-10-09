@@ -9,6 +9,10 @@
   --green: #00a241;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -21,6 +25,30 @@ code {
     monospace;
 }
 
-.schema-accordion-item__extra {
-  position: absolute;
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #c4c4c4;
+}
+
+.heading-2 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 143%;
+  color: black;
+  margin: 0;
+}
+
+.container {
+  min-height: 100vh;
+  height: 100%;
+  background-color: #fafafa;
+}
+
+.content {
+  width: 1040px;
+  margin: 0 auto;
+  padding: 40px 0;
 }
