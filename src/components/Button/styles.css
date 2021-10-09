@@ -16,7 +16,7 @@
 
 .button_secondary {
   padding: 13px 19px;
-  background-color: white;
+  background-color: transparent;
   color: var(--siberian-blue);
   border: 1px solid currentColor;
 }
