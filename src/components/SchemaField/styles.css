@@ -1,0 +1,14 @@
+.schema-field {
+  width: 100%;
+  display: flex;
+  column-gap: 108px;
+}
+
+.schema-field__required {
+  width: 386px;
+}
+
+.schema-field__validation {
+  margin-top: 34px;
+  width: 422px;
+}

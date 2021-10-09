@@ -21,11 +21,14 @@
 .accordion-item__header {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 20px 36px;
+  position: relative;
 }
 
 .accordion-item-title__arrow {
-  margin-right: 11px;
+  position: absolute;
+  top: 28px;
+  left: 16px;
   transform: rotate(-90deg);
   transition: transform ease-in-out 0.1s;
 }
@@ -47,6 +50,10 @@
 }
 
 .accordion-item__body {
-  padding: 30px;
-  padding-top: 0;
+  padding: 0 36px 40px 36px;
+  display: none;
+}
+
+.accordion-item__body_opened {
+  display: block;
 }

@@ -1,68 +1,96 @@
 import { ChangeEvent, useState } from "react";
-import { Schema } from "types/schemas";
-import { validateSchema } from "utils/schemas";
+import { TypeNestedValues, ValueOf } from "types/types";
+import setByPath from "lodash.set";
 
-type Errors<V> = Partial<Record<keyof V, string>>;
+export type FormErrors<V> = Partial<TypeNestedValues<V, string>>;
+export type FormTouched<V> = Partial<TypeNestedValues<V, boolean>>;
 
 type ChangeValue = ChangeEvent<HTMLInputElement> | boolean | string | number;
 
-type FormHelpers<V> = {
-  changeHandler: (name: keyof V, value: ChangeValue) => void;
+export type FormHelpers<V> = {
   isFormValid: () => boolean;
+  changeHandler: (name: keyof V, value: ChangeValue) => void;
+  setValue: (name: keyof V, value: V[keyof V]) => void;
+  setError: (name: keyof V, err: string) => void;
+  touchField: (name: keyof V, value: boolean) => void;
 };
 
-const useForm = <V extends Record<string, unknown>>(initialValues: V) => {
+export type IForm<V> = {
+  values: V;
+  touched: FormTouched<V>;
+  errors: FormErrors<V>;
+  helpers: FormHelpers<V>;
+};
+
+type Args<V> = {
+  initialValues: V;
+  initialErrors?: FormErrors<V>;
+  initialTouched?: {};
+  validate?: (values: V) => FormErrors<V>;
+};
+
+const useForm = <V extends Record<string, unknown>>({
+  initialValues,
+  initialErrors = {},
+  initialTouched = {},
+  validate,
+}: Args<V>): IForm<V> => {
   const [values, setValues] = useState<V>(initialValues);
-  const [errors, setErrors] = useState<Errors<V>>({});
-  const schemas = new Map<keyof V, Schema>();
+  const [errors, setErrors] = useState<FormErrors<V>>(initialErrors);
+  const [touched, setTouched] = useState<FormTouched<V>>(initialTouched);
 
-  const setValue = (name: keyof V, value: string | boolean | number) =>
-    setValues((prev) => ({ ...prev, [name]: value }));
+  const setValue = (path: keyof V, value: ValueOf<V>) => {
+    setValues((prev) => setByPath({ ...prev }, path, value));
+  };
 
-  const setError = (name: keyof V, err: string) =>
-    setErrors((prev) => ({ ...prev, [name]: err }));
+  const setError = (path: keyof V, err: string) =>
+    setErrors((prev) => setByPath({ ...prev }, path, err));
+
+  const touchField = (path: keyof V, value: boolean) =>
+    setTouched((prev) => setByPath({ ...prev }, path, value));
 
   const changeHandler = (name: keyof V, value: ChangeValue) => {
+    touchField(name, true);
+
     switch (typeof value) {
       case "boolean":
-        setValue(name, value); // switch/checkbox
+        setValue(name, value as ValueOf<V>); // switch/checkbox
         break;
       case "string":
-        setValue(name, value); // select
+        setValue(name, value as ValueOf<V>); // select
         break;
       case "number":
-        setValue(name, value); // number input
+        setValue(name, value as ValueOf<V>); // number input
         break;
       default:
-        setValue(name, value.target.value); // input
+        setValue(name, value.target.value as ValueOf<V>); // input
         break;
     }
   };
 
   const isFormValid = () => {
-    let isValid = true;
+    if (validate) {
+      const validateErrs = validate(values);
+      setErrors((prev) => ({ ...prev, ...validateErrs }));
 
-    for (const [name, schema] of schemas) {
-      const value = values[name] as string | number | undefined;
-      const error = validateSchema(schema, value);
-
-      if (error) isValid = false;
-
-      setError(name, error);
+      return !!Object.keys(validateErrs).length;
     }
 
-    return isValid;
+    return !!Object.keys(errors).length;
   };
 
   const helpers: FormHelpers<V> = {
     changeHandler,
     isFormValid,
+    setValue,
+    setError,
+    touchField,
   };
 
   return {
+    touched,
     values,
     errors,
-    schemas,
     helpers,
   };
 };

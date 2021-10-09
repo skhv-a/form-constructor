@@ -6,11 +6,11 @@ import useOnOutsideClick from "hooks/useOnOutsideClick";
 import "./styles.css";
 
 export type Option = {
-  key: string;
+  label: string;
   value: string;
 };
 
-type Props = {
+export type SelectProps = {
   selected?: string;
   options: Option[];
   placeholder: string;
@@ -18,19 +18,19 @@ type Props = {
   onSelect?: (option: string) => void;
 };
 
-const Select: FC<Props> = ({
+const Select: FC<SelectProps> = ({
   options,
-  selected: selectedKey,
+  selected: selectedValue,
   placeholder,
   isInvalid,
   onSelect,
-}: Props) => {
+}: SelectProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isOpened, setOpened] = useBoolean();
 
   useOnOutsideClick(ref, setOpened.off);
 
-  const selected = options.find((o) => o.key === selectedKey);
+  const selected = options.find((o) => o.value === selectedValue);
 
   return (
     <div ref={ref} className="select">
@@ -43,7 +43,7 @@ const Select: FC<Props> = ({
         onClick={setOpened.toggle}
       >
         {selected ? (
-          <div className="select__value">{selected.value}</div>
+          <div className="select__value">{selected.label}</div>
         ) : (
           <div
             className={joinClassNames(
@@ -64,16 +64,17 @@ const Select: FC<Props> = ({
           )}
         >
           {options.map((option) => {
-            const isSelected = option.key === selectedKey;
+            const isSelected = option.value === selectedValue;
             const clickHandler = () => {
-              onSelect?.(isSelected ? "" : option.key); // '' to reset selected value
+              onSelect?.(isSelected ? "" : option.value);
+              // '' to reset selected value
               setOpened.off();
             };
 
             return (
               <OptionItem
                 {...option}
-                key={option.key}
+                key={option.value}
                 isSelected={isSelected}
                 onClick={clickHandler}
               />
@@ -90,17 +91,17 @@ type OptionProps = Option & {
   onClick: () => void;
 };
 
-function OptionItem({ key, value, isSelected, onClick }: OptionProps) {
+function OptionItem({ label, value, isSelected, onClick }: OptionProps) {
   return (
     <div
-      key={key}
+      key={value}
       onClick={onClick}
       className={joinClassNames(
         "select__option",
         isSelected && "select__option_active"
       )}
     >
-      {value}
+      {label}
     </div>
   );
 }

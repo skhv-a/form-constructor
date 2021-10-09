@@ -1,108 +1,63 @@
-import { cloneElement, FormEvent, Fragment, ReactElement } from "react";
-import { Schema } from "types/schemas";
-import useForm from "hooks/useForm";
-import { joinClassNames } from "utils/utils";
+import { FormEvent, useEffect } from "react";
+import { FormProvider } from "contexts/Form";
+import useForm, { FormErrors, IForm } from "hooks/useForm";
+import { flatObj, joinClassNames } from "utils/utils";
+import FormItem from "./Item";
+import FormList from "./List";
 import "./styles.css";
 
 type Props<V> = {
   initialValues: V;
-  children: ReactElement<ItemProps | unknown>[];
-  onSubmit: (values: V) => void;
+  initialErrors?: FormErrors<V>;
+  className?: string;
+  children: (form: IForm<V>) => React.ReactNode;
+  validate?: (values: V) => FormErrors<V>;
+  onSubmit?: (values: V) => void;
+  onValuesChange?: (values: V) => void;
 };
 
 const Form = <V extends Record<string, unknown>>({
+  initialErrors = {},
   initialValues,
+  className,
   children,
+  validate,
   onSubmit,
+  onValuesChange,
 }: Props<V>) => {
-  const { values, errors, schemas, helpers } = useForm<V>(initialValues);
+  const form = useForm<V>({
+    initialValues,
+    initialErrors,
+    validate,
+  });
 
-  const renderFormItem = (item: ReactElement<ItemProps>) => {
-    const {
-      name,
-      schema,
-      children,
-      valuePropName = "value",
-      trigger = "onChange",
-    } = item.props as ItemProps;
+  const { values, helpers } = form;
 
-    if (schema) schemas.set(name, schema);
-
-    const controlledChildren = cloneElement(children, {
-      ...children.props,
-      [valuePropName]: values[name],
-      [trigger]: helpers.changeHandler.bind(null, name),
-    });
-
-    const error = errors[name];
-
-    return cloneElement(item, { ...item.props, error }, controlledChildren);
-  };
+  useEffect(() => {
+    onValuesChange?.(values);
+  }, [values]);
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    
+
+    const paths = Object.keys(flatObj(values, null, {}));
+    paths.forEach((path) => helpers.touchField(path, true));
+
     const isValid = helpers.isFormValid();
-    if (isValid) onSubmit(values);
+    if (isValid) onSubmit?.(values);
   };
 
   return (
-    <form className="form" onSubmit={submitHandler}>
-      {children.map((el, idx) =>
-        isFormItemElement(el) ? (
-          renderFormItem(el as ReactElement<ItemProps>)
-        ) : (
-          <Fragment key={idx}>{el}</Fragment>
-        )
-      )}
+    <form
+      className={joinClassNames("form", className)}
+      onSubmit={submitHandler}
+    >
+      <FormProvider {...form}>{children(form)}</FormProvider>
     </form>
   );
 };
 
-// for another elements support
-function isFormItemElement(element: ReactElement) {
-  return (
-    typeof element.type === "function" &&
-    (element.type as Function).name === "FormItem"
-  );
-}
-
-type ItemProps = {
-  name: string;
-  label?: string;
-  error?: string;
-  schema?: Schema;
-  trigger?: string;
-  valuePropName?: string;
-  invalidPropName?: string;
-  children: ReactElement;
-};
-
-Form.Item = function FormItem({
-  schema,
-  label,
-  error,
-  children,
-  invalidPropName = "isInvalid",
-}: ItemProps) {
-  return (
-    <div className="form-item">
-      <div
-        className={joinClassNames(
-          "form-item__label",
-          error && "form-item__label_error",
-          schema?.required && "form-item__label_required"
-        )}
-      >
-        {label}
-      </div>
-      {cloneElement(children, {
-        ...children.props,
-        [invalidPropName]: !!error,
-      })}
-      <div className="form-item__error">{error}</div>
-    </div>
-  );
-};
+Form.Item = FormItem;
+Form.List = FormList;
 
 export default Form;

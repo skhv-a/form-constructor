@@ -1,12 +1,14 @@
-import { Schema, StringSchema } from "types/schemas";
+import { NumberSchema, StringSchema } from "types/schema";
+import { FormItemSchema } from "./Item";
 
 export const validateSchema = (
-  schema: Schema,
-  value: string | number | undefined
+  schema: FormItemSchema,
+  value: string | number | boolean | undefined
 ): string => {
-  const isEmptyValue = typeof value === "undefined" || value === "";
+  const isEmptyValue =
+    typeof value === "undefined" || value === "" || value === false;
 
-  if (schema.required && isEmptyValue) return "Поле не может быть пустым";
+  if (schema.required && isEmptyValue) return "Заполните поле";
   if (!schema.required && isEmptyValue) return "";
 
   let error = "";
@@ -14,12 +16,18 @@ export const validateSchema = (
   switch (schema.type) {
     case "string":
       error = validateString((value as string) ?? "", schema);
+      error = schema.validate?.(value as string) || error;
       break;
     case "number":
       error = validateNumber(value as number, schema);
+      error = schema.validate?.(value as number) || error;
       break;
     case "phone":
       error = validatePhoneNumber((value as string) ?? "");
+      error = schema.validate?.(value as string) || error;
+      break;
+    case "select":
+      error = schema.validate?.(value as string) || error;
       break;
   }
 
@@ -51,7 +59,7 @@ export const validateString = (value: string, schema: StringSchema): string => {
   return errorMessage;
 };
 
-export const validateNumber = (value: number, schema: StringSchema): string => {
+export const validateNumber = (value: number, schema: NumberSchema): string => {
   let errorMessage = "";
 
   switch (true) {
