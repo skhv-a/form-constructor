@@ -1,5 +1,5 @@
 import { FieldOption } from "types/schema";
-import { ISchemaFieldForm } from "components/SchemaFieldItems";
+import { ISchemaFieldForm } from "components/FieldRequiredItems";
 import Button from "../Button/Button";
 import FormItem from "../Form/Item";
 import FormList from "../Form/List";
