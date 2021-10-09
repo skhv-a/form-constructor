@@ -13,7 +13,7 @@ type Props = {
 const Alert = ({ type, children }: Props) => {
   return (
     <div className={joinClassNames("alert", `alert_${type}`)}>
-      <div className="alert__icon">
+      <div className={joinClassNames("alert__icon", `alert__icon_${type}`)}>
         <img
           src={type === "success" ? check : cross}
           alt={type === "success" ? "check" : "cross"}

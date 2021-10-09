@@ -20,6 +20,11 @@
   height: 24px;
 }
 
+.alert__icon_error {
+  filter: invert(39%) sepia(38%) saturate(938%) hue-rotate(312deg)
+    brightness(112%) contrast(99%);
+}
+
 .alert__content {
   font-size: 16px;
   line-height: 150%;
