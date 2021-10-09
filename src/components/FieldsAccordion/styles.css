@@ -1,0 +1,27 @@
+.fields-list-item__subtitle {
+  color: var(--dark);
+  opacity: 0.6;
+  font-size: 14px;
+  line-height: 157%;
+  font-weight: normal;
+  margin: 0;
+}
+
+.fields-list-item__remove {
+  position: absolute;
+  top: 13px;
+  right: 20px;
+}
+
+.field-header {
+  display: flex;
+  gap: 108px;
+}
+
+.field-header__main {
+  width: 386px;
+}
+
+.field-header__main_invalid {
+  color: var(--red);
+}
