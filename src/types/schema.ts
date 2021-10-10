@@ -50,3 +50,7 @@ export type Schema = {
   name: string;
   fields: SchemaField[];
 };
+
+export type ApiSchema = Schema & {
+  id: number;
+};

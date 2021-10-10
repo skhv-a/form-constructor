@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { FieldType } from "types/schema";
-import Select, { SelectProps } from "../Select/Select";
+import Select, { SelectProps } from "../../Select/Select";
 import { translateFieldType } from "./utils";
 
 const TYPES: FieldType[] = [

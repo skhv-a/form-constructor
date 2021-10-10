@@ -1,9 +1,9 @@
 import { Schema, SchemaField } from "types/schema";
 import { flatObj } from "utils/utils";
-import Button from "../Button/Button";
+import Button from "../../Button/Button";
 import FieldsAccordion from "../FieldsAccordion/FieldsAccordion";
-import Form from "../Form/Form";
-import Input from "../Input/Input";
+import Form from "../../Form/Form";
+import Input from "../../Input/Input";
 import "./styles.css";
 
 const BLANK_FIELD: SchemaField = {

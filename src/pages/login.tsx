@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "components/Button/Button";
-import LoginForm from "components/LoginForm";
+import LoginForm from "components/login/LoginForm";
 import { useTokenContext } from "contexts/Token";
 import useLogin from "hooks/useLogin";
 import Alert from "components/Alert/Alert";
 import logo from "assets/logo.svg";
-import "./styles.css";
+import "./styles/login.css";
 
 function LoginPage() {
   const history = useHistory();

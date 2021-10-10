@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import Form, { FormProps } from "./Form/Form";
-import Input from "./Input/Input";
+import Form, { FormProps } from "../Form/Form";
+import Input from "../Input/Input";
 
 type Values = {
   username: string;

@@ -1,8 +1,8 @@
 import { Schema, SchemaField } from "types/schema";
 import Accordion from "components/Accordion/Accordion";
-import SchemaFieldComponent from "components/SchemaField/SchemaField";
+import SchemaFieldComponent from "components/schemas[new]/SchemaField/SchemaField";
 import { useFormContext } from "contexts/Form";
-import { translateFieldType } from "components/FieldTypeSelect/utils";
+import { translateFieldType } from "components/schemas[new]/FieldTypeSelect/utils";
 import { flatObj, joinClassNames } from "utils/utils";
 import deleteIco from "assets/delete.svg";
 import getByPath from "lodash.get";
