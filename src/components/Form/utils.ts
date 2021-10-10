@@ -37,23 +37,19 @@ export const validateSchema = (
 export const validateString = (value: string, schema: StringSchema): string => {
   let errorMessage = "";
 
-  switch (true) {
-    case !!schema.min:
-      if (value.length < schema.min!) {
-        errorMessage = `Минимум ${schema.min} символов`;
-      }
-      break;
-    case !!schema.max:
-      if (value.length > schema.max!) {
-        errorMessage = `Максимум ${schema.max} символов`;
-      }
-      break;
-    case !!schema.pattern:
-      const regExp = new RegExp(schema.pattern!);
-      if (!isCompletelyMatches(value, regExp)) {
-        errorMessage = "Значение не соответствует шаблону ввода";
-      }
-      break;
+  if (schema.min && value.length < schema.min) {
+    errorMessage = `Минимум ${schema.min} символов`;
+  }
+
+  if (schema.max && value.length > schema.max) {
+    errorMessage = `Максимум ${schema.max} символов`;
+  }
+
+  if (schema.pattern) {
+    const regExp = new RegExp(schema.pattern);
+    if (!isCompletelyMatches(value, regExp)) {
+      errorMessage = "Значение не соответствует шаблону ввода";
+    }
   }
 
   return errorMessage;
@@ -62,20 +58,16 @@ export const validateString = (value: string, schema: StringSchema): string => {
 export const validateNumber = (value: number, schema: NumberSchema): string => {
   let errorMessage = "";
 
-  switch (true) {
-    case isNaN(value):
-      errorMessage = "Введите число";
-      break;
-    case !!schema.min:
-      if (value < schema.min!) {
-        errorMessage = `Минимум ${schema.min}`;
-      }
-      break;
-    case !!schema.max:
-      if (value > schema.max!) {
-        errorMessage = `Максимум ${schema.max}`;
-      }
-      break;
+  if (isNaN(value)) {
+    errorMessage = "Введите число";
+  }
+
+  if (!!schema.min && value < schema.min) {
+    errorMessage = `Минимум ${schema.min}`;
+  }
+
+  if (!!schema.max && value > schema.max) {
+    errorMessage = `Максимум ${schema.max}`;
   }
 
   return errorMessage;

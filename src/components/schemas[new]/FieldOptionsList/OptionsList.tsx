@@ -1,5 +1,5 @@
-import { FieldOption } from "types/schema";
-import { ISchemaFieldForm } from "components/schemas[new]/FieldRequiredItems";
+import { useEffect } from "react";
+import { FieldOption, Schema } from "types/schema";
 import Button from "../../Button/Button";
 import FormItem from "../../Form/Item";
 import FormList from "../../Form/List";
@@ -14,7 +14,7 @@ type Props = {
 };
 
 const OptionsList = ({ basePath }: Props) => {
-  const { errors } = useFormContext<ISchemaFieldForm>();
+  const { errors, helpers } = useFormContext<Schema>();
 
   const optionsErrors = getByPath(errors, `${basePath}.options`) as
     | string
@@ -23,6 +23,13 @@ const OptionsList = ({ basePath }: Props) => {
   const isInvalidOption = Array.isArray(optionsErrors)
     ? optionsErrors.some((o) => o.key || o.value)
     : false;
+
+  useEffect(() => {
+    return () => {
+      helpers.setError(`${basePath}.options` as keyof Schema, "");
+      // to avoid validation after unmount
+    };
+  }, []);
 
   return (
     <FormList<FieldOption> name={`${basePath}.options`}>

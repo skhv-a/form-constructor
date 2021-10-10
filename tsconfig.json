@@ -21,5 +21,9 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "downlevelIteration": true
-  }
+  },
+  "include": [
+    "src",
+    "__tests__"
+  ]
 }

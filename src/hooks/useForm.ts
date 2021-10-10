@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { TypeNestedValues, ValueOf } from "types/types";
-import { flatObj } from "utils/utils";
+import { cloneObj, flatObj } from "utils/utils";
 import setByPath from "lodash.set";
 
 export type FormErrors<V> = Partial<TypeNestedValues<V, string>>;
@@ -41,14 +41,14 @@ const useForm = <V extends Record<string, unknown>>({
   const [touched, setTouched] = useState<FormTouched<V>>(initialTouched);
 
   const setValue = (path: keyof V, value: ValueOf<V>) => {
-    setValues((prev) => setByPath({ ...prev }, path, value));
+    setValues((prev) => setByPath(cloneObj(prev), path, value));
   };
 
   const setError = (path: keyof V, err: string) =>
-    setErrors((prev) => setByPath({ ...prev }, path, err));
+    setErrors((prev) => setByPath(cloneObj(prev), path, err));
 
   const touchField = (path: keyof V, value: boolean) =>
-    setTouched((prev) => setByPath({ ...prev }, path, value));
+    setTouched((prev) => setByPath(cloneObj(prev), path, value));
 
   const changeHandler = (name: keyof V, value: ChangeValue) => {
     touchField(name, true);
