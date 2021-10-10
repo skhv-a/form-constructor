@@ -1,0 +1,21 @@
+.password-input {
+  position: relative;
+}
+
+.input + .password-input__eye {
+  filter: invert(100%) sepia(0%) saturate(1550%) hue-rotate(239deg)
+    brightness(87%) contrast(86%);
+}
+
+.input:focus + .password-input__eye {
+  filter: invert(45%) sepia(58%) saturate(2930%) hue-rotate(180deg)
+    brightness(95%) contrast(88%);
+}
+
+.password-input__eye {
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}

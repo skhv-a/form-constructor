@@ -1,22 +1,25 @@
-import { FC, HTMLProps } from "react";
+import { forwardRef, InputHTMLAttributes } from "react";
 import { joinClassNames } from "utils/utils";
 import "./styles.css";
 
-export type InputProps = HTMLProps<HTMLInputElement> & {
+export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   isInvalid?: boolean;
 };
 
-const Input: FC<InputProps> = ({
-  className,
-  isInvalid,
-  ...props
-}: InputProps) => {
-  return (
-    <input
-      {...props}
-      className={joinClassNames("input", className, isInvalid && "input_error")}
-    />
-  );
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, isInvalid, ...props }, ref) => {
+    return (
+      <input
+        {...props}
+        ref={ref}
+        className={joinClassNames(
+          "input",
+          className,
+          isInvalid && "input_error"
+        )}
+      />
+    );
+  }
+);
 
 export default Input;
