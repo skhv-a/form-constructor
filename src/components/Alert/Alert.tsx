@@ -7,12 +7,13 @@ type AlertType = "success" | "error";
 
 type Props = {
   type: AlertType;
+  className?: string;
   children: React.ReactNode;
 };
 
-const Alert = ({ type, children }: Props) => {
+const Alert = ({ type, className, children }: Props) => {
   return (
-    <div className={joinClassNames("alert", `alert_${type}`)}>
+    <div className={joinClassNames("alert", className, `alert_${type}`)}>
       <div className={joinClassNames("alert__icon", `alert__icon_${type}`)}>
         <img
           src={type === "success" ? check : cross}
