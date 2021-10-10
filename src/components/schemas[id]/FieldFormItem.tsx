@@ -8,7 +8,7 @@ import { SchemaField } from "types/schema";
 
 type Props = { field: SchemaField };
 
-const FieldFromSchema = ({ field }: Props) => {
+const FieldFormItem = ({ field }: Props) => {
   switch (field.type) {
     case "string":
       return (
@@ -88,4 +88,4 @@ function placeholderFromLabel(label: string): string {
   return `Введите ${label.toLowerCase()}`;
 }
 
-export default FieldFromSchema;
+export default FieldFormItem;

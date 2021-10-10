@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Schema } from "types/schema";
 import { FormErrors } from "hooks/useForm";
 import Form from "components/Form/Form";
-import FieldFromSchema from "./FieldFromSchema";
+import FieldFormItem from "./FieldFormItem";
 
 type Props = {
   schema: Schema;
@@ -28,7 +28,7 @@ const FormFromSchema = ({ schema, controls, onSubmit, onFail }: Props) => {
       {() => (
         <>
           {fields.map((field) => (
-            <FieldFromSchema key={field.key} field={field} />
+            <FieldFormItem key={field.key} field={field} />
           ))}
           {controls}
         </>

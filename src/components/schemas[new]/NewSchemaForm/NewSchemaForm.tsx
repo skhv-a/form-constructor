@@ -11,12 +11,12 @@ const BLANK_FIELD: SchemaField = {
   label: "",
   type: "string",
   validation: {},
-  options: [{ key: "", value: "" }],
+  options: [...[{ key: "", value: "" }]],
 };
 
 const INITIAL_VALUES = {
   name: "",
-  fields: [BLANK_FIELD],
+  fields: [{ ...BLANK_FIELD }],
 };
 
 type Props = {
@@ -32,10 +32,12 @@ const NewSchemaForm = ({
 }: Props) => {
   return (
     <Form<Schema> initialValues={initialValues} onSubmit={onSubmit}>
-      {({ errors }) => {
-        const isInvalidField = errors.fields?.some((errs) =>
-          Object.values(flatObj(errs)).some((e) => !!e)
-        );
+      {({ values, errors }) => {
+        const isInvalidField =
+          errors.fields &&
+          errors.fields.some((errs) =>
+            Object.values(flatObj(errs)).some((e) => !!e)
+          );
 
         return (
           <>
@@ -66,7 +68,7 @@ const NewSchemaForm = ({
                         htmlType="button"
                         type="secondary"
                         disabled={isInvalidField}
-                        onClick={() => push(BLANK_FIELD)}
+                        onClick={() => push({ ...BLANK_FIELD })}
                       >
                         Добавить новое свойство
                       </Button>
