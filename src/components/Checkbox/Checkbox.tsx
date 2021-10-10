@@ -5,9 +5,9 @@ import InlineLabel from "components/InlineLabel/InlineLabel";
 
 type Props = {
   label: string;
-  checked: boolean;
+  checked?: boolean;
   disabled?: boolean;
-  onCheck: (isChecked: boolean) => void;
+  onCheck?: (isChecked: boolean) => void;
 };
 
 const Checkbox = ({ label, checked, disabled, onCheck }: Props) => {
@@ -21,7 +21,7 @@ const Checkbox = ({ label, checked, disabled, onCheck }: Props) => {
           type="checkbox"
           checked={checked}
           disabled={disabled}
-          onChange={(e) => onCheck(e.target.checked)}
+          onChange={(e) => onCheck?.(e.target.checked)}
         />
         <div className="checkbox__control" />
         <img src={checkmark} alt="checkmark" className="checkbox__checkmark" />

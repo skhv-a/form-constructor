@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { TypeNestedValues, ValueOf } from "types/types";
+import { flatObj } from "utils/utils";
 import setByPath from "lodash.set";
 
 export type FormErrors<V> = Partial<TypeNestedValues<V, string>>;
@@ -73,10 +74,10 @@ const useForm = <V extends Record<string, unknown>>({
       const validateErrs = validate(values);
       setErrors((prev) => ({ ...prev, ...validateErrs }));
 
-      return !Object.keys(validateErrs).length;
+      return isNoErrors(validateErrs);
     }
 
-    return !Object.keys(errors).length;
+    return isNoErrors(errors);
   };
 
   const helpers: FormHelpers<V> = {
@@ -94,5 +95,10 @@ const useForm = <V extends Record<string, unknown>>({
     helpers,
   };
 };
+
+function isNoErrors(errors: Record<string, unknown>): boolean {
+  // flatObj for nested validations
+  return Object.values(flatObj(errors)).every((err) => err === "");
+}
 
 export default useForm;

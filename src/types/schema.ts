@@ -19,6 +19,10 @@ export type PhoneSchema = Partial<{
   required: boolean;
 }>;
 
+export type CheckboxSchema = Partial<{
+  required: boolean;
+}>;
+
 export type FieldType =
   | "string"
   | "number"

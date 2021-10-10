@@ -1,9 +1,10 @@
-import AuthedRoute from "components/AuthedRoute";
-import { TokenProvider } from "contexts/Token";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LoginPage from "pages/login";
 import SchemasPage from "pages/schemas";
 import NewSchemaPage from "pages/schemas/new";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import SchemaPage from "pages/schemas/[id]";
+import AuthedRoute from "components/AuthedRoute";
+import { TokenProvider } from "contexts/Token";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
               </Route>
               <AuthedRoute exact path="/schemas">
                 <SchemasPage />
+              </AuthedRoute>
+              <AuthedRoute exact path="/schemas/:id">
+                <SchemaPage />
               </AuthedRoute>
               <AuthedRoute exact path="/schemas/new">
                 <NewSchemaPage />
