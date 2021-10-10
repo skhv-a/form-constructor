@@ -53,7 +53,7 @@ const FormItem: FC<Props> = ({
 
   useEffect(() => {
     if (schema) helpers.setError(name, validateSchema(schema, value));
-  }, [value]);
+  }, [value]); // to avoid extra validations
 
   const isError = error && isTouched;
 
