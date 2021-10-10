@@ -1,11 +1,12 @@
 import logo from "assets/logo.svg";
-import { useLocation, useRouteMatch } from "react-router";
+import { useTokenContext } from "contexts/Token";
+import { useLocation } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
 import { joinClassNames } from "utils/utils";
 import "./styles.css";
 
 const Navbar = () => {
-  useRouteMatch();
+  const { setToken } = useTokenContext();
   return (
     <div className="navbar-container">
       <div className="navbar">
@@ -16,7 +17,9 @@ const Navbar = () => {
             <Link to="/schemas/new">Создать схему</Link>
           </div>
           <div className="navbar-links__group">
-            <Link to="/logout">Выйти</Link>
+            <span className="navbar__link" onClick={() => setToken("")}>
+              Выйти
+            </span>
           </div>
         </div>
       </div>

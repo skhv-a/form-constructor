@@ -6,7 +6,7 @@ import FormItem from "./Item";
 import FormList from "./List";
 import "./styles.css";
 
-type Props<V> = {
+export type FormProps<V> = {
   initialValues: V;
   initialErrors?: FormErrors<V>;
   className?: string;
@@ -24,7 +24,7 @@ const Form = <V extends Record<string, unknown>>({
   validate,
   onSubmit,
   onValuesChange,
-}: Props<V>) => {
+}: FormProps<V>) => {
   const form = useForm<V>({
     initialValues,
     initialErrors,
@@ -40,11 +40,11 @@ const Form = <V extends Record<string, unknown>>({
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
 
-    const paths = Object.keys(flatObj(values, null, {}));
+    const paths = Object.keys(flatObj(values));
     paths.forEach((path) => helpers.touchField(path, true));
 
     const isValid = helpers.isFormValid();
-    if (isValid) onSubmit?.(values);
+    if (isValid && onSubmit) onSubmit(values);
   };
 
   return (

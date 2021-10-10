@@ -21,6 +21,7 @@
 }
 
 .navbar__link {
+  cursor: pointer;
   font-size: 18px;
   line-height: 156%;
   color: var(--siberian-blue);

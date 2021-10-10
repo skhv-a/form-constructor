@@ -41,6 +41,16 @@ code {
   margin: 0;
 }
 
+.heading-3 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 156%;
+  color: black;
+  margin: 0;
+}
+
 .container {
   min-height: 100vh;
   height: 100%;

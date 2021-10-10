@@ -73,10 +73,10 @@ const useForm = <V extends Record<string, unknown>>({
       const validateErrs = validate(values);
       setErrors((prev) => ({ ...prev, ...validateErrs }));
 
-      return !!Object.keys(validateErrs).length;
+      return !Object.keys(validateErrs).length;
     }
 
-    return !!Object.keys(errors).length;
+    return !Object.keys(errors).length;
   };
 
   const helpers: FormHelpers<V> = {
