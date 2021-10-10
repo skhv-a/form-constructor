@@ -33,9 +33,11 @@ const NewSchemaForm = ({
   return (
     <Form<Schema> initialValues={initialValues} onSubmit={onSubmit}>
       {({ errors }) => {
-        const isInvalidField = errors.fields?.some((errs) =>
-          Object.values(flatObj(errs)).some((e) => !!e)
-        );
+        const isInvalidField =
+          errors.fields &&
+          errors.fields.some((errs) =>
+            Object.values(flatObj(errs)).some((e) => !!e)
+          );
 
         return (
           <>
