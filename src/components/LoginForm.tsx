@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Form, { FormProps } from "./Form/Form";
 import Input from "./Input/Input";
+import PasswordInput from "./PasswordInput/PasswordInput";
 
 type Values = {
   username: string;
@@ -20,7 +21,7 @@ const LoginForm = ({ controls, ...formProps }: Props) => {
             <Input placeholder="admin" />
           </Form.Item>
           <Form.Item label="Пароль" name="password">
-            <Input placeholder="****" />
+            <PasswordInput placeholder="****" />
           </Form.Item>
           {controls}
         </>
