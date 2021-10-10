@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldFormItem checkbox 1`] = `
+<FormItem
+  name="checkbox"
+  schema={
+    Object {
+      "type": "checkbox",
+    }
+  }
+  trigger="onCheck"
+  valuePropName="checked"
+>
+  <Checkbox
+    label="чекбокс"
+  />
+</FormItem>
+`;
+
+exports[`FieldFormItem number 1`] = `
+<FormItem
+  label="число"
+  name="number"
+  schema={
+    Object {
+      "type": "number",
+    }
+  }
+>
+  <NumberInput
+    placeholder="Введите число"
+  />
+</FormItem>
+`;
+
+exports[`FieldFormItem password 1`] = `
+<FormItem
+  label="пароль"
+  name="password"
+  schema={
+    Object {
+      "type": "string",
+    }
+  }
+>
+  <PasswordInput
+    placeholder="Введите пароль"
+  />
+</FormItem>
+`;
+
+exports[`FieldFormItem phone 1`] = `
+<FormItem
+  label="телефон"
+  name="phone"
+  schema={
+    Object {
+      "type": "phone",
+    }
+  }
+>
+  <ForwardRef
+    placeholder="Введите телефон"
+  />
+</FormItem>
+`;
+
+exports[`FieldFormItem select 1`] = `
+<FormItem
+  label="значение из селекта"
+  name="select"
+  schema={
+    Object {
+      "type": "select",
+    }
+  }
+  trigger="onSelect"
+  valuePropName="selected"
+>
+  <Select
+    options={
+      Array [
+        Object {
+          "label": "Первое значение",
+          "value": "foo",
+        },
+        Object {
+          "label": "Второе значение",
+          "value": "bar",
+        },
+      ]
+    }
+    placeholder="Введите значение из селекта"
+  />
+</FormItem>
+`;
+
+exports[`FieldFormItem string 1`] = `
+<FormItem
+  label="строка"
+  name="string"
+  schema={
+    Object {
+      "type": "string",
+    }
+  }
+>
+  <ForwardRef
+    placeholder="Введите строка"
+  />
+</FormItem>
+`;
+
+exports[`FieldFormItem validation passed 1`] = `
+<FormItem
+  label="строка"
+  name="string"
+  schema={
+    Object {
+      "max": 10,
+      "min": 5,
+      "pattern": "\\\\d+",
+      "required": true,
+      "type": "string",
+    }
+  }
+>
+  <ForwardRef
+    placeholder="Введите строка"
+  />
+</FormItem>
+`;
