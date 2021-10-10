@@ -1,6 +1,6 @@
-import { ValidationItems } from "components/SchemaField/SchemaField";
-import Form from "./Form/Form";
-import Switch from "./Switch/Switch";
+import { ValidationItems } from "components/schemas[new]/SchemaField/SchemaField";
+import Form from "../Form/Form";
+import Switch from "../Switch/Switch";
 
 const CheckboxValidation: ValidationItems = ({ basePath }) => {
   return (

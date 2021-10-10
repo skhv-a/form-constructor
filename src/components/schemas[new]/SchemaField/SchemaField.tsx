@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { FieldType, Schema } from "types/schema";
-import FieldRequiredItems from "components/FieldRequiredItems";
+import FieldRequiredItems from "components/schemas[new]/FieldRequiredItems";
 import { useFormContext } from "contexts/Form";
 import { getValidationItemsByType } from "./utils";
 import getByPath from "lodash.get";
