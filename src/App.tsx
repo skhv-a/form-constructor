@@ -1,6 +1,6 @@
 import AuthedRoute from "components/AuthedRoute";
 import { TokenProvider } from "contexts/Token";
-import LoginPage from "pages/login/login";
+import LoginPage from "pages/login";
 import SchemasPage from "pages/schemas";
 import NewSchemaPage from "pages/schemas/new";
 import { BrowserRouter, Switch, Route } from "react-router-dom";

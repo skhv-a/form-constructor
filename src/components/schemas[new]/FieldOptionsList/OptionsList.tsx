@@ -1,9 +1,9 @@
 import { FieldOption } from "types/schema";
-import { ISchemaFieldForm } from "components/FieldRequiredItems";
-import Button from "../Button/Button";
-import FormItem from "../Form/Item";
-import FormList from "../Form/List";
-import Input from "../Input/Input";
+import { ISchemaFieldForm } from "components/schemas[new]/FieldRequiredItems";
+import Button from "../../Button/Button";
+import FormItem from "../../Form/Item";
+import FormList from "../../Form/List";
+import Input from "../../Input/Input";
 import { useFormContext } from "contexts/Form";
 import getByPath from "lodash.get";
 import cross from "assets/cross.svg";

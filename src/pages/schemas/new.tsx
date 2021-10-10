@@ -1,6 +1,6 @@
 import Button from "components/Button/Button";
 import Navbar from "components/Navbar/Navbar";
-import NewSchemaForm from "components/NewSchemaForm/NewSchemaForm";
+import NewSchemaForm from "components/schemas[new]/NewSchemaForm/NewSchemaForm";
 
 function NewSchemaPage() {
   return (

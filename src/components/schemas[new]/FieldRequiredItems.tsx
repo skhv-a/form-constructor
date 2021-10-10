@@ -1,7 +1,7 @@
 import { FieldType, SchemaField } from "types/schema";
 import FieldTypeSelect from "./FieldTypeSelect/FieldTypeSelect";
-import Form from "./Form/Form";
-import Input from "./Input/Input";
+import Form from "../Form/Form";
+import Input from "../Input/Input";
 import OptionsList from "./FieldOptionsList/OptionsList";
 
 export type ISchemaFieldForm = Omit<SchemaField, "validation">;

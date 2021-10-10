@@ -1,8 +1,8 @@
-import { ValidationItems } from "components/SchemaField/SchemaField";
-import Form from "../Form/Form";
-import Input from "../Input/Input";
-import NumberInput from "../NumberInput";
-import Switch from "../Switch/Switch";
+import { ValidationItems } from "components/schemas[new]/SchemaField/SchemaField";
+import Form from "../../Form/Form";
+import Input from "../../Input/Input";
+import NumberInput from "../../NumberInput";
+import Switch from "../../Switch/Switch";
 import "./styles.css";
 
 const StringValidation: ValidationItems = ({ basePath }) => {
