@@ -13,6 +13,7 @@ export type FormProps<V> = {
   children: (form: IForm<V>) => React.ReactNode;
   validate?: (values: V) => FormErrors<V>;
   onSubmit?: (values: V) => void;
+  onFail?: (errors: FormErrors<V>) => void;
   onValuesChange?: (values: V) => void;
 };
 
@@ -23,6 +24,7 @@ const Form = <V extends Record<string, unknown>>({
   children,
   validate,
   onSubmit,
+  onFail,
   onValuesChange,
 }: FormProps<V>) => {
   const form = useForm<V>({
@@ -31,7 +33,7 @@ const Form = <V extends Record<string, unknown>>({
     validate,
   });
 
-  const { values, helpers } = form;
+  const { values, errors, helpers } = form;
 
   useEffect(() => {
     onValuesChange?.(values);
@@ -44,7 +46,11 @@ const Form = <V extends Record<string, unknown>>({
     paths.forEach((path) => helpers.touchField(path, true));
 
     const isValid = helpers.isFormValid();
-    if (isValid && onSubmit) onSubmit(values);
+    if (isValid) {
+      onSubmit?.(values);
+    } else {
+      onFail?.(errors);
+    }
   };
 
   return (

@@ -2,6 +2,7 @@ import { cloneElement, FC, ReactElement, useEffect } from "react";
 import { useFormContext } from "contexts/Form";
 import { joinClassNames } from "utils/utils";
 import {
+  CheckboxSchema,
   NumberSchema,
   PhoneSchema,
   SelectSchema,
@@ -10,7 +11,7 @@ import {
 import getByPath from "lodash.get";
 import { validateSchema } from "./utils";
 
-type SchemaType = "string" | "phone" | "number" | "select";
+type SchemaType = "string" | "phone" | "number" | "select" | "checkbox";
 
 type Validate<V> = {
   validate?: (value: V) => string;
@@ -22,7 +23,8 @@ export type FormItemSchema =
   | (TypeWithSchema<"string", StringSchema> & Validate<string>)
   | (TypeWithSchema<"phone", PhoneSchema> & Validate<string>)
   | (TypeWithSchema<"number", NumberSchema> & Validate<number>)
-  | (TypeWithSchema<"select", SelectSchema> & Validate<string>);
+  | (TypeWithSchema<"select", SelectSchema> & Validate<string>)
+  | (TypeWithSchema<"checkbox", CheckboxSchema> & Validate<boolean>);
 
 type Props = {
   name: string;
