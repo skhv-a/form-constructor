@@ -2,11 +2,14 @@
   "name": "sibdev-task",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://skhv-a.github.io/sibdev-task/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --watch",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +51,7 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
+    "gh-pages": "^3.2.3",
     "jest-svg-transformer": "^1.0.0",
     "jest-transform-css": "^2.1.0",
     "ts-jest": "^26.5.6",
