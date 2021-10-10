@@ -19,11 +19,11 @@ function App() {
               <AuthedRoute exact path="/schemas">
                 <SchemasPage />
               </AuthedRoute>
-              <AuthedRoute exact path="/schemas/:id">
-                <SchemaPage />
-              </AuthedRoute>
               <AuthedRoute exact path="/schemas/new">
                 <NewSchemaPage />
+              </AuthedRoute>
+              <AuthedRoute exact path="/schemas/:id">
+                <SchemaPage />
               </AuthedRoute>
             </Switch>
           </BrowserRouter>
