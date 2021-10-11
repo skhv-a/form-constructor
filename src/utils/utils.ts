@@ -30,6 +30,3 @@ export const flatObj = (
 };
 
 export const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
-export const cloneObj = <T extends Record<string, unknown>>(obj: T): T =>
-  JSON.parse(JSON.stringify(obj));
