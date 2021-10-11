@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route, HashRouter } from "react-router-dom";
 import LoginPage from "pages/login";
 import SchemasPage from "pages/schemas";
 import NewSchemaPage from "pages/schemas/new";
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <div className="container">
         <TokenProvider>
-          <BrowserRouter>
+          <HashRouter>
             <Switch>
               <Route exact path="/">
                 <LoginPage />
@@ -26,7 +26,7 @@ function App() {
                 <SchemaPage />
               </AuthedRoute>
             </Switch>
-          </BrowserRouter>
+          </HashRouter>
         </TokenProvider>
       </div>
     </div>
