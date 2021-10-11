@@ -1,6 +1,7 @@
 import { RequestState } from "hooks/useRequest";
 import { useState } from "react";
 import { ApiSchema } from "types/schema";
+import { getSchemasFromLocalStorage } from "utils/localStorageSchemas";
 import { sleep } from "utils/utils";
 
 type State = RequestState<ApiSchema[]>;
@@ -20,10 +21,8 @@ const useGetSchemas = (): [State, () => Promise<void>] => {
 
     await sleep(500);
 
-    const rawLocalSchemas = localStorage.getItem("schemas") as string;
-    setState((prev) => ({ ...prev, response: JSON.parse(rawLocalSchemas) }));
-
-    setState((prev) => ({ ...prev, isLoading: false }));
+    const schemas = getSchemasFromLocalStorage();
+    setState((prev) => ({ ...prev, response: schemas, isLoading: false }));
   };
 
   return [state, getSchemas];
