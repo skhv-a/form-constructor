@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/sibdev-task/static/css/main.da19a0af.chunk.css",
+    "main.css": "/sibdev-task/static/css/main.25654633.chunk.css",
     "main.js": "/sibdev-task/static/js/main.80ccd745.chunk.js",
     "main.js.map": "/sibdev-task/static/js/main.80ccd745.chunk.js.map",
     "runtime-main.js": "/sibdev-task/static/js/runtime-main.2d38fdc7.js",
@@ -8,7 +8,7 @@
     "static/js/2.e0a07d52.chunk.js": "/sibdev-task/static/js/2.e0a07d52.chunk.js",
     "static/js/2.e0a07d52.chunk.js.map": "/sibdev-task/static/js/2.e0a07d52.chunk.js.map",
     "index.html": "/sibdev-task/index.html",
-    "static/css/main.da19a0af.chunk.css.map": "/sibdev-task/static/css/main.da19a0af.chunk.css.map",
+    "static/css/main.25654633.chunk.css.map": "/sibdev-task/static/css/main.25654633.chunk.css.map",
     "static/js/2.e0a07d52.chunk.js.LICENSE.txt": "/sibdev-task/static/js/2.e0a07d52.chunk.js.LICENSE.txt",
     "static/media/arrow.ce7aa419.svg": "/sibdev-task/static/media/arrow.ce7aa419.svg",
     "static/media/check.c6233f6a.svg": "/sibdev-task/static/media/check.c6233f6a.svg",
@@ -22,7 +22,7 @@
   "entrypoints": [
     "static/js/runtime-main.2d38fdc7.js",
     "static/js/2.e0a07d52.chunk.js",
-    "static/css/main.da19a0af.chunk.css",
+    "static/css/main.25654633.chunk.css",
     "static/js/main.80ccd745.chunk.js"
   ]
 }
