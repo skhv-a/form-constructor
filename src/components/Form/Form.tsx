@@ -35,8 +35,6 @@ const Form = <V extends Record<string, unknown>>({
 
   const { values, errors, helpers } = form;
 
-  // 'field[0].options[0].name'
-
   useEffect(() => {
     onValuesChange?.(values);
   }, [values]);

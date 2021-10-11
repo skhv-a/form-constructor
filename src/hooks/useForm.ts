@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { TypeNestedValues, ValueOf } from "types/types";
-import { cloneObj, flatObj } from "utils/utils";
+import { flatObj } from "utils/utils";
 import setByPath from "lodash.set";
+import cloneObj from "lodash.clonedeep";
 
 export type FormErrors<V> = Partial<TypeNestedValues<V, string>>;
 export type FormTouched<V> = Partial<TypeNestedValues<V, boolean>>;
