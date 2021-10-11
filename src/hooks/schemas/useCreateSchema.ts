@@ -1,6 +1,7 @@
 import { RequestState } from "hooks/useRequest";
 import { useState } from "react";
 import { ApiSchema, Schema } from "types/schema";
+import { setSchemasToLocalStorage } from "utils/localStorageSchemas";
 import { sleep } from "utils/utils";
 
 type State = RequestState<ApiSchema>;
@@ -21,10 +22,7 @@ const useCreateSchema = (): [State, (schema: Schema) => Promise<void>] => {
     await sleep(500);
 
     const apiSchema: ApiSchema = { ...schema, id: Date.now() };
-    const schemas = JSON.parse(localStorage.getItem("schemas") as string);
-    const updatedSchemas = [...schemas, apiSchema];
-
-    localStorage.setItem("schemas", JSON.stringify(updatedSchemas));
+    setSchemasToLocalStorage(apiSchema);
 
     setState({
       response: apiSchema,
