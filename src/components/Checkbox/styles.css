@@ -28,8 +28,8 @@
 
 .checkbox__control {
   cursor: pointer;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   border-radius: 3px;
   border: 2px solid currentColor;
   opacity: 0.3;
@@ -49,8 +49,6 @@
 
 .checkbox__input:checked ~ .checkbox__control {
   border: 0;
-  width: 20px;
-  height: 20px;
   background-color: currentColor;
   opacity: 1;
 }
